@@ -71,7 +71,7 @@
             color: #004085;
         }
 
-        input[type="text"], input[type="date"], input[type="time"], select, textarea {
+        input[type="text"], input[type="tel"], input[type="date"], input[type="time"], select, textarea, input[type="password"] {
             width: calc(100% - 22px); /* Ajuste para el borde */
             padding: 10px;
             border: 1px solid #ced4da;
@@ -130,19 +130,112 @@
             padding: 8px 15px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
+        /* Estilos para la sección de trabajadores */
+        .trabajadores-section {
+            background-color: #1a466e; /* Azul oscuro */
+            color: #ffffff; /* Texto blanco */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-            .section {
-                padding: 15px;
-            }
+        .trabajadores-section h2 {
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
 
-            button {
-                font-size: 0.9rem;
-            }
+        .trabajadores-section .form-group {
+            margin-bottom: 20px;
+        }
+
+        .trabajadores-section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .trabajadores-section table, th, td {
+            border: 1px solid #ffffff; /* Borde blanco */
+            text-align: center;
+            padding: 10px;
+            color: #ffffff; /* Texto blanco */
+        }
+
+        .trabajadores-section th {
+            background-color: #004085; /* Azul principal */
+            color: #ffffff;
+        }
+
+        .trabajadores-section .actions button {
+            background-color: #002b5c; /* Azul más oscuro */
+        }
+
+        .trabajadores-section .form-group label {
+            color: #ffffff;
+        }
+
+        /* Estilos para la descripción */
+        .trabajador-descripcion {
+            background-color: #3b5998; /* Azul Facebook */
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .trabajador-descripcion p {
+            margin: 0;
+        }
+
+        /* Estilos para la dirección */
+        .trabajador-direccion {
+            background-color: #343a40; /* Gris oscuro */
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .trabajador-direccion p {
+            margin: 0;
+        }
+
+        /* Estilos para el formulario de inicio de sesión */
+        .login-form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #004085;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .login-form label {
+            font-weight: bold;
+            color: #004085;
+        }
+
+        .login-form input[type="text"], .login-form input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
         }
     </style>
 </head>
@@ -151,16 +244,15 @@
         <header>
             <h1>Jaac61</h1>
         </header>
-
         <div class="section turnos-section">
             <h2>Turnos</h2>
             <div class="form-group">
                 <label for="turnoSelect">Tipo de Turno:</label>
                 <select id="turnoSelect">
+                    <option value="noche">Turno de Noche</option>
                     <option value="madrugada">Turno de Madrugada</option>
                     <option value="mañana">Turno de Mañana</option>
                     <option value="tarde">Turno de Tarde</option>
-                    <option value="noche">Turno de Noche</option>
                     <option value="descanso">Semana de Descanso</option>
                 </select>
             </div>
@@ -172,7 +264,7 @@
                 <label for="turnosTextarea">Detalles:</label>
                 <textarea id="turnosTextarea" rows="5" placeholder="Escribe aquí los detalles de tu turno..."></textarea>
             </div>
-            <div class="actions">
+            <div class="form-group">
                 <button onclick="saveTurnos()">Guardar Turno</button>
             </div>
             <ul id="turnosList"></ul>
@@ -187,196 +279,278 @@
                         <th>Matrícula</th>
                         <th>Fecha de Entrada</th>
                         <th>Hora de Entrada</th>
-                        <th>Fecha de Salida</th>
-                        <th>Hora de Salida</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aquí se agregarán las filas dinámicamente -->
+                    <!-- Las filas de vehículos se agregarán aquí dinámicamente -->
                 </tbody>
             </table>
             <div class="form-group">
-                <label for="nombreVehiculo">Nombre del Vehículo:</label>
-                <input type="text" id="nombreVehiculo" placeholder="Nombre del Vehículo">
+                <label for="vehiculoNombre">Nombre del Vehículo:</label>
+                <input type="text" id="vehiculoNombre">
             </div>
             <div class="form-group">
-                <label for="matriculaVehiculo">Matrícula del Vehículo:</label>
-                <input type="text" id="matriculaVehiculo" placeholder="Matrícula del Vehículo">
+                <label for="vehiculoMatricula">Matrícula:</label>
+                <input type="text" id="vehiculoMatricula">
             </div>
             <div class="form-group">
-                <label for="fechaEntrada">Fecha de Entrada:</label>
-                <input type="date" id="fechaEntrada">
+                <label for="vehiculoFecha">Fecha de Entrada:</label>
+                <input type="date" id="vehiculoFecha">
             </div>
             <div class="form-group">
-                <label for="horaEntrada">Hora de Entrada:</label>
-                <input type="time" id="horaEntrada">
+                <label for="vehiculoHora">Hora de Entrada:</label>
+                <input type="time" id="vehiculoHora">
             </div>
             <div class="form-group">
-                <label for="fechaSalida">Fecha de Salida:</label>
-                <input type="date" id="fechaSalida">
+                <button onclick="agregarVehiculo()">Agregar Vehículo</button>
+            </div>
+        </div>
+
+        <div class="section trabajadores-section">
+            <h2>Trabajadores</h2>
+            <table id="trabajadoresTable">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cargo</th>
+                        <th>Fecha de Ingreso</th>
+                        <th>Descripción</th>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas de trabajadores se agregarán aquí dinámicamente -->
+                </tbody>
+            </table>
+            <div class="form-group">
+                <label for="trabajadorNombre">Nombre:</label>
+                <input type="text" id="trabajadorNombre">
             </div>
             <div class="form-group">
-                <label for="horaSalida">Hora de Salida:</label>
-                <input type="time" id="horaSalida">
+                <label for="trabajadorApellido">Apellido:</label>
+                <input type="text" id="trabajadorApellido">
             </div>
-            <div class="actions">
-                <button onclick="addVehiculo()">Agregar Vehículo</button>
+            <div class="form-group">
+                <label for="trabajadorCargo">Cargo:</label>
+                <input type="text" id="trabajadorCargo">
+            </div>
+            <div class="form-group">
+                <label for="trabajadorFechaIngreso">Fecha de Ingreso:</label>
+                <input type="date" id="trabajadorFechaIngreso">
+            </div>
+            <div class="form-group">
+                <label for="trabajadorDescripcion">Descripción:</label>
+                <textarea id="trabajadorDescripcion" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="trabajadorDireccion">Dirección:</label>
+                <textarea id="trabajadorDireccion" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <button onclick="agregarTrabajador()">Agregar Trabajador</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Función para guardar los turnos
         function saveTurnos() {
-            const turnoSelect = document.getElementById('turnoSelect');
-            const turnoDate = document.getElementById('turnoDate').value;
-            const turnosTextarea = document.getElementById('turnosTextarea').value;
-            const turnoType = turnoSelect.options[turnoSelect.selectedIndex].text;
+            const turno = document.getElementById('turnoSelect').value;
+            const fecha = document.getElementById('turnoDate').value;
+            const detalles = document.getElementById('turnosTextarea').value;
 
-            if (!turnoDate || !turnosTextarea) {
-                alert('Por favor, llena ambos campos.');
-                return;
-            }
-
-            const turnos = JSON.parse(localStorage.getItem('turnos')) || [];
-            turnos.push({ tipo: turnoType, date: turnoDate, details: turnosTextarea });
-            localStorage.setItem('turnos', JSON.stringify(turnos));
-            alert('Turno guardado con éxito.');
-            loadTurnos();
-        }
-
-        function loadTurnos() {
-            const turnosList = document.getElementById('turnosList');
-            turnosList.innerHTML = '';
-            const turnos = JSON.parse(localStorage.getItem('turnos')) || [];
-
-            turnos.forEach(turno => {
+            if (turno && fecha && detalles) {
+                const turnosList = document.getElementById('turnosList');
                 const listItem = document.createElement('li');
-                listItem.textContent = `${turno.tipo} - ${turno.date}: ${turno.details}`;
+                listItem.textContent = `${turno} - ${formatDate(fecha)}: ${detalles}`;
                 turnosList.appendChild(listItem);
-            });
-        }
 
-        function addVehiculo() {
-            const nombre = document.getElementById('nombreVehiculo').value;
-            const matricula = document.getElementById('matriculaVehiculo').value;
-            const fechaEntrada = document.getElementById('fechaEntrada').value;
-            const horaEntrada = document.getElementById('horaEntrada').value;
-            const fechaSalida = document.getElementById('fechaSalida').value;
-            const horaSalida = document.getElementById('horaSalida').value;
-
-            if (nombre === '' || matricula === '' || fechaEntrada === '' || horaEntrada === '' || fechaSalida === '' || horaSalida === '') {
-                alert('Por favor, llena todos los campos.');
-                return;
-            }
-
-            const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
-            const newRow = table.insertRow();
-            const nameCell = newRow.insertCell(0);
-            const matriculaCell = newRow.insertCell(1);
-            const fechaEntradaCell = newRow.insertCell(2);
-            const horaEntradaCell = newRow.insertCell(3);
-            const fechaSalidaCell = newRow.insertCell(4);
-            const horaSalidaCell = newRow.insertCell(5);
-            const actionsCell = newRow.insertCell(6);
-
-            nameCell.textContent = nombre;
-            matriculaCell.textContent = matricula;
-            fechaEntradaCell.textContent = fechaEntrada;
-            horaEntradaCell.textContent = horaEntrada;
-            fechaSalidaCell.textContent = fechaSalida;
-            horaSalidaCell.textContent = horaSalida;
-            actionsCell.innerHTML = '<button onclick="editVehiculo(this)">Editar</button> <button onclick="deleteVehiculo(this)">Eliminar</button>';
-
-            const vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
-            vehiculos.push({ nombre, matricula, fechaEntrada, horaEntrada, fechaSalida, horaSalida });
-            localStorage.setItem('vehiculos', JSON.stringify(vehiculos));
-
-            document.getElementById('nombreVehiculo').value = '';
-            document.getElementById('matriculaVehiculo').value = '';
-            document.getElementById('fechaEntrada').value = '';
-            document.getElementById('horaEntrada').value = '';
-            document.getElementById('fechaSalida').value = '';
-            document.getElementById('horaSalida').value = '';
-        }
-
-        function editVehiculo(button) {
-            const row = button.parentElement.parentElement;
-            const nombre = row.cells[0].textContent;
-            const matricula = row.cells[1].textContent;
-            const fechaEntrada = row.cells[2].textContent;
-            const horaEntrada = row.cells[3].textContent;
-            const fechaSalida = row.cells[4].textContent;
-            const horaSalida = row.cells[5].textContent;
-
-            const newNombre = prompt('Editar nombre del vehículo:', nombre);
-            const newMatricula = prompt('Editar matrícula del vehículo:', matricula);
-
-            if (newNombre !== null && newMatricula !== null) {
-                row.cells[0].textContent = newNombre;
-                row.cells[1].textContent = newMatricula;
-
-                updateVehiculoInStorage(nombre, matricula, newNombre, newMatricula);
+                // Limpiar campos después de guardar
+                document.getElementById('turnoSelect').value = '';
+                document.getElementById('turnoDate').value = '';
+                document.getElementById('turnosTextarea').value = '';
+            } else {
+                alert('Por favor, completa todos los campos');
             }
         }
 
-        function deleteVehiculo(button) {
-            const row = button.parentElement.parentElement;
-            const nombre = row.cells[0].textContent;
-            const matricula = row.cells[1].textContent;
+        // Función para agregar vehículos
+        function agregarVehiculo() {
+            const nombre = document.getElementById('vehiculoNombre').value;
+            const matricula = document.getElementById('vehiculoMatricula').value;
+            const fecha = document.getElementById('vehiculoFecha').value;
+            const hora = document.getElementById('vehiculoHora').value;
 
-            row.remove();
-            deleteVehiculoFromStorage(nombre, matricula);
-        }
-
-        function updateVehiculoInStorage(oldNombre, oldMatricula, newNombre, newMatricula) {
-            const vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
-
-            const vehiculo = vehiculos.find(v => v.nombre === oldNombre && v.matricula === oldMatricula);
-            if (vehiculo) {
-                vehiculo.nombre = newNombre;
-                vehiculo.matricula = newMatricula;
-                localStorage.setItem('vehiculos', JSON.stringify(vehiculos));
-            }
-        }
-
-        function deleteVehiculoFromStorage(nombre, matricula) {
-            let vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
-
-            vehiculos = vehiculos.filter(v => v.nombre !== nombre || v.matricula !== matricula);
-            localStorage.setItem('vehiculos', JSON.stringify(vehiculos));
-        }
-
-        function loadVehiculos() {
-            const vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
-            const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
-            table.innerHTML = '';
-
-            vehiculos.forEach(vehiculo => {
+            if (nombre && matricula && fecha && hora) {
+                const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
                 const newRow = table.insertRow();
-                const nameCell = newRow.insertCell(0);
+
+                const nombreCell = newRow.insertCell(0);
                 const matriculaCell = newRow.insertCell(1);
-                const fechaEntradaCell = newRow.insertCell(2);
-                const horaEntradaCell = newRow.insertCell(3);
-                const fechaSalidaCell = newRow.insertCell(4);
-                const horaSalidaCell = newRow.insertCell(5);
+                const fechaCell = newRow.insertCell(2);
+                const horaCell = newRow.insertCell(3);
+                const actionsCell = newRow.insertCell(4);
+
+                nombreCell.textContent = nombre;
+                matriculaCell.textContent = matricula;
+                fechaCell.textContent = formatDate(fecha);
+                horaCell.textContent = hora;
+
+                // Crear botones de acción
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Editar';
+                editButton.onclick = function() {
+                    editarVehiculo(newRow);
+                };
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.onclick = function() {
+                    eliminarVehiculo(newRow);
+                };
+
+                actionsCell.appendChild(editButton);
+                actionsCell.appendChild(deleteButton);
+
+                // Limpiar campos después de agregar
+                document.getElementById('vehiculoNombre').value = '';
+                document.getElementById('vehiculoMatricula').value = '';
+                document.getElementById('vehiculoFecha').value = '';
+                document.getElementById('vehiculoHora').value = '';
+            } else {
+                alert('Por favor, completa todos los campos');
+            }
+        }
+
+        // Función para editar un vehículo
+        function editarVehiculo(row) {
+            const nombreCell = row.cells[0];
+            const matriculaCell = row.cells[1];
+            const fechaCell = row.cells[2];
+            const horaCell = row.cells[3];
+
+            const newNombre = prompt('Editar nombre del vehículo', nombreCell.textContent);
+            const newMatricula = prompt('Editar matrícula', matriculaCell.textContent);
+            const newFecha = prompt('Editar fecha de entrada (dd/mm/yyyy)', fechaCell.textContent);
+            const newHora = prompt('Editar hora de entrada', horaCell.textContent);
+
+            if (newNombre && newMatricula && newFecha && newHora) {
+                nombreCell.textContent = newNombre;
+                matriculaCell.textContent = newMatricula;
+                fechaCell.textContent = newFecha;
+                horaCell.textContent = newHora;
+            } else {
+                alert('Por favor, completa todos los campos');
+            }
+        }
+
+        // Función para eliminar un vehículo
+        function eliminarVehiculo(row) {
+            const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
+            table.deleteRow(row.rowIndex - 1);
+        }
+
+        // Función para agregar trabajadores
+        function agregarTrabajador() {
+            const nombre = document.getElementById('trabajadorNombre').value;
+            const apellido = document.getElementById('trabajadorApellido').value;
+            const cargo = document.getElementById('trabajadorCargo').value;
+            const fechaIngreso = document.getElementById('trabajadorFechaIngreso').value;
+            const descripcion = document.getElementById('trabajadorDescripcion').value;
+            const direccion = document.getElementById('trabajadorDireccion').value;
+
+            if (nombre && apellido && cargo && fechaIngreso && descripcion && direccion) {
+                const table = document.getElementById('trabajadoresTable').getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
+
+                const nombreCell = newRow.insertCell(0);
+                const apellidoCell = newRow.insertCell(1);
+                const cargoCell = newRow.insertCell(2);
+                const fechaIngresoCell = newRow.insertCell(3);
+                const descripcionCell = newRow.insertCell(4);
+                const direccionCell = newRow.insertCell(5);
                 const actionsCell = newRow.insertCell(6);
 
-                nameCell.textContent = vehiculo.nombre;
-                matriculaCell.textContent = vehiculo.matricula;
-                fechaEntradaCell.textContent = vehiculo.fechaEntrada;
-                horaEntradaCell.textContent = vehiculo.horaEntrada;
-                fechaSalidaCell.textContent = vehiculo.fechaSalida;
-                horaSalidaCell.textContent = vehiculo.horaSalida;
-                actionsCell.innerHTML = '<button onclick="editVehiculo(this)">Editar</button> <button onclick="deleteVehiculo(this)">Eliminar</button>';
-            });
+                nombreCell.textContent = nombre;
+                apellidoCell.textContent = apellido;
+                cargoCell.textContent = cargo;
+                fechaIngresoCell.textContent = formatDate(fechaIngreso);
+                descripcionCell.textContent = descripcion;
+                direccionCell.textContent = direccion;
+
+                // Crear botones de acción
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Editar';
+                editButton.onclick = function() {
+                    editarTrabajador(newRow);
+                };
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.onclick = function() {
+                    eliminarTrabajador(newRow);
+                };
+
+                actionsCell.appendChild(editButton);
+                actionsCell.appendChild(deleteButton);
+
+                // Limpiar campos después de agregar
+                document.getElementById('trabajadorNombre').value = '';
+                document.getElementById('trabajadorApellido').value = '';
+                document.getElementById('trabajadorCargo').value = '';
+                document.getElementById('trabajadorFechaIngreso').value = '';
+                document.getElementById('trabajadorDescripcion').value = '';
+                document.getElementById('trabajadorDireccion').value = '';
+            } else {
+                alert('Por favor, completa todos los campos');
+            }
         }
 
-        window.onload = function() {
-            loadTurnos();
-            loadVehiculos();
+        // Función para editar un trabajador
+        function editarTrabajador(row) {
+            const nombreCell = row.cells[0];
+            const apellidoCell = row.cells[1];
+            const cargoCell = row.cells[2];
+            const fechaIngresoCell = row.cells[3];
+            const descripcionCell = row.cells[4];
+            const direccionCell = row.cells[5];
+
+            const newNombre = prompt('Editar nombre', nombreCell.textContent);
+            const newApellido = prompt('Editar apellido', apellidoCell.textContent);
+            const newCargo = prompt('Editar cargo', cargoCell.textContent);
+            const newFechaIngreso = prompt('Editar fecha de ingreso (dd/mm/yyyy)', fechaIngresoCell.textContent);
+            const newDescripcion = prompt('Editar descripción', descripcionCell.textContent);
+            const newDireccion = prompt('Editar dirección', direccionCell.textContent);
+
+            if (newNombre && newApellido && newCargo && newFechaIngreso && newDescripcion && newDireccion) {
+                nombreCell.textContent = newNombre;
+                apellidoCell.textContent = newApellido;
+                cargoCell.textContent = newCargo;
+                fechaIngresoCell.textContent = newFechaIngreso;
+                descripcionCell.textContent = newDescripcion;
+                direccionCell.textContent = newDireccion;
+            } else {
+                alert('Por favor, completa todos los campos');
+            }
+        }
+
+        // Función para eliminar un trabajador
+        function eliminarTrabajador(row) {
+            const table = document.getElementById('trabajadoresTable').getElementsByTagName('tbody')[0];
+            table.deleteRow(row.rowIndex - 1);
+        }
+
+        // Función para formatear fechas
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses son base 0
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
         }
     </script>
 </body>
 </html>
+
 

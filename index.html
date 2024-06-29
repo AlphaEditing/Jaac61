@@ -19,31 +19,36 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         /* Contenedor principal */
         .container {
             width: 90%;
-            max-width: 700px; /* Reducido el ancho máximo */
+            max-width: 900px; /* Reducido el ancho máximo */
             background-color: #ffffff;
-            padding: 20px;
-            border-radius: 5px;
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Encabezados */
-        h1, h2 {
+        /* Encabezado */
+        header {
             text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
             color: #004085;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
 
         /* Estilos para secciones */
         .section {
             background-color: #f8f9fa;
-            padding: 10px;
-            margin-bottom: 20px;
+            padding: 20px;
+            margin-bottom: 30px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -58,7 +63,7 @@
 
         /* Estilos para formularios */
         .form-group {
-            margin-bottom: 5px;
+            margin-bottom: 15px;
         }
 
         label {
@@ -143,7 +148,9 @@
 </head>
 <body>
     <div class="container">
-        <h1>Jaac61</h1>
+        <header>
+            <h1>Jaac61</h1>
+        </header>
 
         <div class="section turnos-section">
             <h2>Turnos</h2>
@@ -162,8 +169,8 @@
                 <input type="date" id="turnoDate">
             </div>
             <div class="form-group">
-                <label for="turnosTextarea">Descripción:</label>
-                <textarea id="turnosTextarea" rows="5" placeholder="Escribe aquí la Descripción de tu turno..."></textarea>
+                <label for="turnosTextarea">Detalles:</label>
+                <textarea id="turnosTextarea" rows="5" placeholder="Escribe aquí los detalles de tu turno..."></textarea>
             </div>
             <div class="actions">
                 <button onclick="saveTurnos()">Guardar Turno</button>
@@ -372,3 +379,4 @@
     </script>
 </body>
 </html>
+

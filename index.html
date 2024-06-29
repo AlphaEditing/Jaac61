@@ -3,44 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaac61 - Vigilante de Seguridad</title>
+    <title>Jaac61</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #002b5c;
-            color: #ffffff;
+        /* Reset CSS básico */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+        /* Estilos generales del body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Contenedor principal */
         .container {
-            width: 80%;
-            margin: 0 auto;
+            width: 90%;
+            max-width: 700px; /* Reducido el ancho máximo */
+            background-color: #ffffff;
             padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
-        h1 {
+
+        /* Encabezados */
+        h1, h2 {
             text-align: center;
-            color: #ffffff;
+            color: #004085;
+            margin-bottom: 20px;
         }
-        .upload-section, .turnos-section, .vehiculos-section {
-            background-color: #00509e;
-            padding: 20px;
+
+        /* Estilos para secciones */
+        .section {
+            background-color: #f8f9fa;
+            padding: 10px;
             margin-bottom: 20px;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+
+        .section h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #004085;
+            text-transform: uppercase;
+            font-size: 1.5rem;
         }
-        table, th, td {
-            border: 1px solid #ffffff;
+
+        /* Estilos para formularios */
+        .form-group {
+            margin-bottom: 5px;
         }
-        th, td {
+
+        label {
+            font-weight: bold;
+            color: #004085;
+        }
+
+        input[type="text"], input[type="date"], input[type="time"], select, textarea {
+            width: calc(100% - 22px); /* Ajuste para el borde */
             padding: 10px;
-            text-align: left;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            font-size: 1rem;
         }
-        th {
-            background-color: #003366;
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
         }
+
+        /* Estilos para botones */
         button {
             background-color: #004085;
             color: #ffffff;
@@ -48,43 +87,101 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
         }
+
         button:hover {
             background-color: #002b5c;
         }
-        input[type="date"] {
+
+        /* Estilos para tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ced4da;
+            text-align: center;
             padding: 10px;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 10px;
+        }
+
+        th {
+            background-color: #004085;
+            color: #ffffff;
+        }
+
+        /* Estilos para acciones en la tabla */
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .actions button {
+            width: auto;
+            padding: 8px 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Jaac61 - Vigilante de Seguridad</h1>
+        <h1>Jaac61</h1>
 
-        <div class="upload-section">
-            <h2>Subir y Guardar Archivos</h2>
-            <input type="file" id="fileInput">
-            <button onclick="saveFile()">Guardar Archivo</button>
-        </div>
-
-        <div class="turnos-section">
+        <div class="section turnos-section">
             <h2>Turnos</h2>
-            <input type="date" id="turnoDate">
-            <textarea id="turnosTextarea" rows="10" cols="50" placeholder="Escribe aquí los detalles de tu turno..."></textarea>
-            <button onclick="saveTurnos()">Guardar Turno</button>
+            <div class="form-group">
+                <label for="turnoSelect">Tipo de Turno:</label>
+                <select id="turnoSelect">
+                    <option value="madrugada">Turno de Madrugada</option>
+                    <option value="mañana">Turno de Mañana</option>
+                    <option value="tarde">Turno de Tarde</option>
+                    <option value="noche">Turno de Noche</option>
+                    <option value="descanso">Semana de Descanso</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="turnoDate">Fecha:</label>
+                <input type="date" id="turnoDate">
+            </div>
+            <div class="form-group">
+                <label for="turnosTextarea">Descripción:</label>
+                <textarea id="turnosTextarea" rows="5" placeholder="Escribe aquí la Descripción de tu turno..."></textarea>
+            </div>
+            <div class="actions">
+                <button onclick="saveTurnos()">Guardar Turno</button>
+            </div>
             <ul id="turnosList"></ul>
         </div>
 
-        <div class="vehiculos-section">
+        <div class="section vehiculos-section">
             <h2>Vehículos</h2>
             <table id="vehiculosTable">
                 <thead>
                     <tr>
                         <th>Nombre</th>
                         <th>Matrícula</th>
+                        <th>Fecha de Entrada</th>
+                        <th>Hora de Entrada</th>
+                        <th>Fecha de Salida</th>
+                        <th>Hora de Salida</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -92,39 +189,50 @@
                     <!-- Aquí se agregarán las filas dinámicamente -->
                 </tbody>
             </table>
-            <input type="text" id="nombreVehiculo" placeholder="Nombre del Vehículo">
-            <input type="text" id="matriculaVehiculo" placeholder="Matrícula del Vehículo">
-            <button onclick="addVehiculo()">Agregar Vehículo</button>
+            <div class="form-group">
+                <label for="nombreVehiculo">Nombre del Vehículo:</label>
+                <input type="text" id="nombreVehiculo" placeholder="Nombre del Vehículo">
+            </div>
+            <div class="form-group">
+                <label for="matriculaVehiculo">Matrícula del Vehículo:</label>
+                <input type="text" id="matriculaVehiculo" placeholder="Matrícula del Vehículo">
+            </div>
+            <div class="form-group">
+                <label for="fechaEntrada">Fecha de Entrada:</label>
+                <input type="date" id="fechaEntrada">
+            </div>
+            <div class="form-group">
+                <label for="horaEntrada">Hora de Entrada:</label>
+                <input type="time" id="horaEntrada">
+            </div>
+            <div class="form-group">
+                <label for="fechaSalida">Fecha de Salida:</label>
+                <input type="date" id="fechaSalida">
+            </div>
+            <div class="form-group">
+                <label for="horaSalida">Hora de Salida:</label>
+                <input type="time" id="horaSalida">
+            </div>
+            <div class="actions">
+                <button onclick="addVehiculo()">Agregar Vehículo</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function saveFile() {
-            const fileInput = document.getElementById('fileInput');
-            if (fileInput.files.length === 0) {
-                alert('Por favor, selecciona un archivo primero.');
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                localStorage.setItem(file.name, e.target.result);
-                alert('Archivo guardado con éxito.');
-            };
-            reader.readAsDataURL(file);
-        }
-
         function saveTurnos() {
+            const turnoSelect = document.getElementById('turnoSelect');
             const turnoDate = document.getElementById('turnoDate').value;
             const turnosTextarea = document.getElementById('turnosTextarea').value;
+            const turnoType = turnoSelect.options[turnoSelect.selectedIndex].text;
+
             if (!turnoDate || !turnosTextarea) {
                 alert('Por favor, llena ambos campos.');
                 return;
             }
 
             const turnos = JSON.parse(localStorage.getItem('turnos')) || [];
-            turnos.push({ date: turnoDate, details: turnosTextarea });
+            turnos.push({ tipo: turnoType, date: turnoDate, details: turnosTextarea });
             localStorage.setItem('turnos', JSON.stringify(turnos));
             alert('Turno guardado con éxito.');
             loadTurnos();
@@ -137,7 +245,7 @@
 
             turnos.forEach(turno => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${turno.date}: ${turno.details}`;
+                listItem.textContent = `${turno.tipo} - ${turno.date}: ${turno.details}`;
                 turnosList.appendChild(listItem);
             });
         }
@@ -145,9 +253,13 @@
         function addVehiculo() {
             const nombre = document.getElementById('nombreVehiculo').value;
             const matricula = document.getElementById('matriculaVehiculo').value;
+            const fechaEntrada = document.getElementById('fechaEntrada').value;
+            const horaEntrada = document.getElementById('horaEntrada').value;
+            const fechaSalida = document.getElementById('fechaSalida').value;
+            const horaSalida = document.getElementById('horaSalida').value;
 
-            if (nombre === '' || matricula === '') {
-                alert('Por favor, llena ambos campos.');
+            if (nombre === '' || matricula === '' || fechaEntrada === '' || horaEntrada === '' || fechaSalida === '' || horaSalida === '') {
+                alert('Por favor, llena todos los campos.');
                 return;
             }
 
@@ -155,24 +267,40 @@
             const newRow = table.insertRow();
             const nameCell = newRow.insertCell(0);
             const matriculaCell = newRow.insertCell(1);
-            const actionsCell = newRow.insertCell(2);
+            const fechaEntradaCell = newRow.insertCell(2);
+            const horaEntradaCell = newRow.insertCell(3);
+            const fechaSalidaCell = newRow.insertCell(4);
+            const horaSalidaCell = newRow.insertCell(5);
+            const actionsCell = newRow.insertCell(6);
 
             nameCell.textContent = nombre;
             matriculaCell.textContent = matricula;
+            fechaEntradaCell.textContent = fechaEntrada;
+            horaEntradaCell.textContent = horaEntrada;
+            fechaSalidaCell.textContent = fechaSalida;
+            horaSalidaCell.textContent = horaSalida;
             actionsCell.innerHTML = '<button onclick="editVehiculo(this)">Editar</button> <button onclick="deleteVehiculo(this)">Eliminar</button>';
 
             const vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
-            vehiculos.push({ nombre, matricula });
+            vehiculos.push({ nombre, matricula, fechaEntrada, horaEntrada, fechaSalida, horaSalida });
             localStorage.setItem('vehiculos', JSON.stringify(vehiculos));
 
             document.getElementById('nombreVehiculo').value = '';
             document.getElementById('matriculaVehiculo').value = '';
+            document.getElementById('fechaEntrada').value = '';
+            document.getElementById('horaEntrada').value = '';
+            document.getElementById('fechaSalida').value = '';
+            document.getElementById('horaSalida').value = '';
         }
 
         function editVehiculo(button) {
             const row = button.parentElement.parentElement;
             const nombre = row.cells[0].textContent;
             const matricula = row.cells[1].textContent;
+            const fechaEntrada = row.cells[2].textContent;
+            const horaEntrada = row.cells[3].textContent;
+            const fechaSalida = row.cells[4].textContent;
+            const horaSalida = row.cells[5].textContent;
 
             const newNombre = prompt('Editar nombre del vehículo:', nombre);
             const newMatricula = prompt('Editar matrícula del vehículo:', matricula);
@@ -221,10 +349,18 @@
                 const newRow = table.insertRow();
                 const nameCell = newRow.insertCell(0);
                 const matriculaCell = newRow.insertCell(1);
-                const actionsCell = newRow.insertCell(2);
+                const fechaEntradaCell = newRow.insertCell(2);
+                const horaEntradaCell = newRow.insertCell(3);
+                const fechaSalidaCell = newRow.insertCell(4);
+                const horaSalidaCell = newRow.insertCell(5);
+                const actionsCell = newRow.insertCell(6);
 
                 nameCell.textContent = vehiculo.nombre;
                 matriculaCell.textContent = vehiculo.matricula;
+                fechaEntradaCell.textContent = vehiculo.fechaEntrada;
+                horaEntradaCell.textContent = vehiculo.horaEntrada;
+                fechaSalidaCell.textContent = vehiculo.fechaSalida;
+                horaSalidaCell.textContent = vehiculo.horaSalida;
                 actionsCell.innerHTML = '<button onclick="editVehiculo(this)">Editar</button> <button onclick="deleteVehiculo(this)">Eliminar</button>';
             });
         }

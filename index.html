@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaac61 - Vigilante de Seguridad</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #002b5c;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+        .upload-section, .turnos-section, .vehiculos-section {
+            background-color: #00509e;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ffffff;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #003366;
+        }
+        button {
+            background-color: #004085;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #002b5c;
+        }
+        input[type="date"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jaac61 - Vigilante de Seguridad</h1>
+
+        <div class="upload-section">
+            <h2>Subir y Guardar Archivos</h2>
+            <input type="file" id="fileInput">
+            <button onclick="saveFile()">Guardar Archivo</button>
+        </div>
+
+        <div class="turnos-section">
+            <h2>Turnos</h2>
+            <input type="date" id="turnoDate">
+            <textarea id="turnosTextarea" rows="10" cols="50" placeholder="Escribe aquí los detalles de tu turno..."></textarea>
+            <button onclick="saveTurnos()">Guardar Turno</button>
+            <ul id="turnosList"></ul>
+        </div>
+
+        <div class="vehiculos-section">
+            <h2>Vehículos</h2>
+            <table id="vehiculosTable">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Matrícula</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se agregarán las filas dinámicamente -->
+                </tbody>
+            </table>
+            <input type="text" id="nombreVehiculo" placeholder="Nombre del Vehículo">
+            <input type="text" id="matriculaVehiculo" placeholder="Matrícula del Vehículo">
+            <button onclick="addVehiculo()">Agregar Vehículo</button>
+        </div>
+    </div>
+
+    <script>
+        function saveFile() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) {
+                alert('Por favor, selecciona un archivo primero.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                localStorage.setItem(file.name, e.target.result);
+                alert('Archivo guardado con éxito.');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveTurnos() {
+            const turnoDate = document.getElementById('turnoDate').value;
+            const turnosTextarea = document.getElementById('turnosTextarea').value;
+            if (!turnoDate || !turnosTextarea) {
+                alert('Por favor, llena ambos campos.');
+                return;
+            }
+
+            const turnos = JSON.parse(localStorage.getItem('turnos')) || [];
+            turnos.push({ date: turnoDate, details: turnosTextarea });
+            localStorage.setItem('turnos', JSON.stringify(turnos));
+            alert('Turno guardado con éxito.');
+            loadTurnos();
+        }
+
+        function loadTurnos() {
+            const turnosList = document.getElementById('turnosList');
+            turnosList.innerHTML = '';
+            const turnos = JSON.parse(localStorage.getItem('turnos')) || [];
+
+            turnos.forEach(turno => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${turno.date}: ${turno.details}`;
+                turnosList.appendChild(listItem);
+            });
+        }
+
+        function addVehiculo() {
+            const nombre = document.getElementById('nombreVehiculo').value;
+            const matricula = document.getElementById('matriculaVehiculo').value;
+
+            if (nombre === '' || matricula === '') {
+                alert('Por favor, llena ambos campos.');
+                return;
+            }
+
+            const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            const nameCell = newRow.insertCell(0);
+            const matriculaCell = newRow.insertCell(1);
+            const actionsCell = newRow.insertCell(2);
+
+            nameCell.textContent = nombre;
+            matriculaCell.textContent = matricula;
+            actionsCell.innerHTML = '<button onclick="editVehiculo(this)">Editar</button> <button onclick="deleteVehiculo(this)">Eliminar</button>';
+
+            const vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
+            vehiculos.push({ nombre, matricula });
+            localStorage.setItem('vehiculos', JSON.stringify(vehiculos));
+
+            document.getElementById('nombreVehiculo').value = '';
+            document.getElementById('matriculaVehiculo').value = '';
+        }
+
+        function editVehiculo(button) {
+            const row = button.parentElement.parentElement;
+            const nombre = row.cells[0].textContent;
+            const matricula = row.cells[1].textContent;
+
+            const newNombre = prompt('Editar nombre del vehículo:', nombre);
+            const newMatricula = prompt('Editar matrícula del vehículo:', matricula);
+
+            if (newNombre !== null && newMatricula !== null) {
+                row.cells[0].textContent = newNombre;
+                row.cells[1].textContent = newMatricula;
+
+                updateVehiculoInStorage(nombre, matricula, newNombre, newMatricula);
+            }
+        }
+
+        function deleteVehiculo(button) {
+            const row = button.parentElement.parentElement;
+            const nombre = row.cells[0].textContent;
+            const matricula = row.cells[1].textContent;
+
+            row.remove();
+            deleteVehiculoFromStorage(nombre, matricula);
+        }
+
+        function updateVehiculoInStorage(oldNombre, oldMatricula, newNombre, newMatricula) {
+            const vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
+
+            const vehiculo = vehiculos.find(v => v.nombre === oldNombre && v.matricula === oldMatricula);
+            if (vehiculo) {
+                vehiculo.nombre = newNombre;
+                vehiculo.matricula = newMatricula;
+                localStorage.setItem('vehiculos', JSON.stringify(vehiculos));
+            }
+        }
+
+        function deleteVehiculoFromStorage(nombre, matricula) {
+            let vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
+
+            vehiculos = vehiculos.filter(v => v.nombre !== nombre || v.matricula !== matricula);
+            localStorage.setItem('vehiculos', JSON.stringify(vehiculos));
+        }
+
+        function loadVehiculos() {
+            const vehiculos = JSON.parse(localStorage.getItem('vehiculos')) || [];
+            const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = '';
+
+            vehiculos.forEach(vehiculo => {
+                const newRow = table.insertRow();
+                const nameCell = newRow.insertCell(0);
+                const matriculaCell = newRow.insertCell(1);
+                const actionsCell = newRow.insertCell(2);
+
+                nameCell.textContent = vehiculo.nombre;
+                matriculaCell.textContent = vehiculo.matricula;
+                actionsCell.innerHTML = '<button onclick="editVehiculo(this)">Editar</button> <button onclick="deleteVehiculo(this)">Eliminar</button>';
+            });
+        }
+
+        window.onload = function() {
+            loadTurnos();
+            loadVehiculos();
+        }
+    </script>
+</body>
+</html>

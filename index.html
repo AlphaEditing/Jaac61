@@ -3,257 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaac61</title>
+    <title>JAAC61</title>
     <style>
-        /* Reset CSS básico */
-        * {
+        body {
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            background-color: #081c24; /* Fondo azul oscuro */
+            color: #ffffff; /* Texto blanco */
         }
 
-        /* Estilos generales del body */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Contenedor principal */
         .container {
-            width: 90%;
-            max-width: 900px; /* Reducido el ancho máximo */
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Encabezado */
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        header h1 {
-            color: #004085;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        /* Estilos para secciones */
-        .section {
-            background-color: #f8f9fa;
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: rgba(20, 33, 46, 0.95); /* Fondo azul oscuro semi-transparente */
             padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section {
             margin-bottom: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .section h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: #004085;
-            text-transform: uppercase;
-            font-size: 1.5rem;
+            border-bottom: 1px solid #3d85c6; /* Azul más claro */
+            padding-bottom: 10px;
+            color: #3d85c6; /* Azul más claro */
+            margin-bottom: 20px;
         }
 
-        /* Estilos para formularios */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            font-weight: bold;
-            color: #004085;
-        }
-
-        input[type="text"], input[type="tel"], input[type="date"], input[type="time"], select, textarea, input[type="password"] {
-            width: calc(100% - 22px); /* Ajuste para el borde */
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        /* Estilos para botones */
-        button {
-            background-color: #004085;
-            color: #ffffff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #002b5c;
-        }
-
-        /* Estilos para tablas */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 10px;
+            color: #ffffff; /* Texto blanco */
         }
 
         table, th, td {
-            border: 1px solid #ced4da;
-            text-align: center;
+            border: 1px solid #3d85c6; /* Azul más claro */
+        }
+
+        th, td {
             padding: 10px;
+            text-align: left;
         }
 
         th {
-            background-color: #004085;
-            color: #ffffff;
-        }
-
-        /* Estilos para acciones en la tabla */
-        .actions {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .actions button {
-            width: auto;
-            padding: 8px 15px;
-        }
-
-        /* Estilos para la sección de trabajadores */
-        .trabajadores-section {
-            background-color: #1a466e; /* Azul oscuro */
-            color: #ffffff; /* Texto blanco */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .trabajadores-section h2 {
-            margin-bottom: 20px;
-            color: #ffffff;
-        }
-
-        .trabajadores-section .form-group {
-            margin-bottom: 20px;
-        }
-
-        .trabajadores-section table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        .trabajadores-section table, th, td {
-            border: 1px solid #ffffff; /* Borde blanco */
-            text-align: center;
-            padding: 10px;
+            background-color: #3d85c6; /* Azul más claro */
             color: #ffffff; /* Texto blanco */
         }
 
-        .trabajadores-section th {
-            background-color: #004085; /* Azul principal */
-            color: #ffffff;
+        button {
+            padding: 10px 16px;
+            background-color: #3d85c6; /* Azul más claro */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
         }
 
-        .trabajadores-section .actions button {
-            background-color: #002b5c; /* Azul más oscuro */
+        button:hover {
+            background-color: #316a9f; /* Azul más oscuro al pasar el cursor */
         }
 
-        .trabajadores-section .form-group label {
-            color: #ffffff;
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #333; /* Texto gris oscuro */
         }
 
-        /* Estilos para la descripción */
-        .trabajador-descripcion {
-            background-color: #3b5998; /* Azul Facebook */
-            color: #ffffff;
-            padding: 15px;
-            border-radius: 5px;
+        .form-group {
             margin-top: 10px;
         }
 
-        .trabajador-descripcion p {
-            margin: 0;
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5em;
+            color: rgba(255, 255, 255, 0.1); /* Texto blanco semi-transparente */
+            pointer-events: none;
+            z-index: -1;
         }
 
-        /* Estilos para la dirección */
-        .trabajador-direccion {
-            background-color: #343a40; /* Gris oscuro */
-            color: #ffffff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        .trabajador-direccion p {
-            margin: 0;
-        }
-
-        /* Estilos para el formulario de inicio de sesión */
-        .login-form {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-form h2 {
+        .page-title {
             text-align: center;
+            font-size: 2.5em;
             margin-bottom: 20px;
-            color: #004085;
-        }
-
-        .login-form .form-group {
-            margin-bottom: 15px;
-        }
-
-        .login-form label {
-            font-weight: bold;
-            color: #004085;
-        }
-
-        .login-form input[type="text"], .login-form input[type="password"] {
-            width: calc(100% - 22px);
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .login-form button {
-            width: 100%;
-            padding: 10px;
+            color: #3d85c6; /* Azul más claro */
         }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Jaac61</h1>
-        </header>
-        <div class="section turnos-section">
+        <div class="page-title">JAAC61</div>
+        <div class="section">
             <h2>Turnos</h2>
             <div class="form-group">
                 <label for="turnoSelect">Tipo de Turno:</label>
                 <select id="turnoSelect">
-                    <option value="noche">Turno de Noche</option>
-                    <option value="madrugada">Turno de Madrugada</option>
-                    <option value="mañana">Turno de Mañana</option>
-                    <option value="tarde">Turno de Tarde</option>
-                    <option value="descanso">Semana de Descanso</option>
+                    <option value="noche">Noche</option>
+                    <option value="mañana">Mañana</option>
+                    <option value="tarde">Tarde</option>
                 </select>
             </div>
             <div class="form-group">
@@ -262,7 +126,7 @@
             </div>
             <div class="form-group">
                 <label for="turnosTextarea">Detalles:</label>
-                <textarea id="turnosTextarea" rows="5" placeholder="Escribe aquí los detalles de tu turno..."></textarea>
+                <textarea id="turnosTextarea" rows="3"></textarea>
             </div>
             <div class="form-group">
                 <button onclick="saveTurnos()">Guardar Turno</button>
@@ -270,7 +134,7 @@
             <ul id="turnosList"></ul>
         </div>
 
-        <div class="section vehiculos-section">
+        <div class="section">
             <h2>Vehículos</h2>
             <table id="vehiculosTable">
                 <thead>
@@ -279,6 +143,7 @@
                         <th>Matrícula</th>
                         <th>Fecha de Entrada</th>
                         <th>Hora de Entrada</th>
+                        <th>Hora de Salida</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -295,24 +160,23 @@
                 <input type="text" id="vehiculoMatricula">
             </div>
             <div class="form-group">
-                <label for="vehiculoFecha">Fecha de Entrada:</label>
-                <input type="date" id="vehiculoFecha">
+                <label for="vehiculoFechaEntrada">Fecha de Entrada:</label>
+                <input type="date" id="vehiculoFechaEntrada">
             </div>
             <div class="form-group">
-                <label for="vehiculoHora">Hora de Entrada:</label>
-                <input type="time" id="vehiculoHora">
+                <label for="vehiculoHoraEntrada">Hora de Entrada:</label>
+                <input type="time" id="vehiculoHoraEntrada">
             </div>
             <div class="form-group">
-                <label for="vehiculoHora">Hora de Salida:</label>
-                <input type="time" id="vehiculoHora">
+                <label for="vehiculoHoraSalida">Hora de Salida:</label>
+                <input type="time" id="vehiculoHoraSalida">
             </div>
             <div class="form-group">
-                <button onclick="agregarVehiculo()">Agregar Vehículo</button>
+                <button onclick="saveVehiculo()">Guardar Vehículo</button>
             </div>
-            
         </div>
 
-        <div class="section trabajadores-section">
+        <div class="section">
             <h2>Trabajadores</h2>
             <table id="trabajadoresTable">
                 <thead>
@@ -352,113 +216,88 @@
             </div>
             <div class="form-group">
                 <label for="trabajadorDireccion">Dirección:</label>
-                <textarea id="trabajadorDireccion" rows="3"></textarea>
+                <input type="text" id="trabajadorDireccion">
             </div>
             <div class="form-group">
-                <button onclick="agregarTrabajador()">Agregar Trabajador</button>
+                <button onclick="saveTrabajador()">Guardar Trabajador</button>
             </div>
         </div>
-    </div>
-
     <script>
-        // Función para guardar los turnos
+        // Arreglo para almacenar los turnos
+        let turnos = [];
+
+        // Función para guardar un turno y actualizar la lista
         function saveTurnos() {
-            const turno = document.getElementById('turnoSelect').value;
+            const tipoTurno = document.getElementById('turnoSelect').value;
             const fecha = document.getElementById('turnoDate').value;
             const detalles = document.getElementById('turnosTextarea').value;
 
-            if (turno && fecha && detalles) {
-                const turnosList = document.getElementById('turnosList');
-                const listItem = document.createElement('li');
-                listItem.textContent = `${turno} - ${formatDate(fecha)}: ${detalles}`;
-                turnosList.appendChild(listItem);
+            const turno = {
+                tipo: tipoTurno,
+                fecha: fecha,
+                detalles: detalles
+            };
 
-                // Limpiar campos después de guardar
-                document.getElementById('turnoSelect').value = '';
-                document.getElementById('turnoDate').value = '';
-                document.getElementById('turnosTextarea').value = '';
-            } else {
-                alert('Por favor, completa todos los campos');
-            }
+            turnos.push(turno);
+
+            // Actualizar la lista de turnos en el HTML
+            const turnosList = document.getElementById('turnosList');
+            const li = document.createElement('li');
+            li.textContent = `${tipoTurno} - ${fecha} - ${detalles}`;
+            turnosList.appendChild(li);
+
+            // Limpiar los campos después de guardar
+            document.getElementById('turnoSelect').value = 'noche';
+            document.getElementById('turnoDate').value = '';
+            document.getElementById('turnosTextarea').value = '';
         }
 
-        // Función para agregar vehículos
-        function agregarVehiculo() {
+        // Arreglo para almacenar los vehículos
+        let vehiculos = [];
+
+        // Función para guardar un vehículo y actualizar la tabla
+        function saveVehiculo() {
             const nombre = document.getElementById('vehiculoNombre').value;
             const matricula = document.getElementById('vehiculoMatricula').value;
-            const fecha = document.getElementById('vehiculoFecha').value;
-            const hora = document.getElementById('vehiculoHora').value;
+            const fechaEntrada = document.getElementById('vehiculoFechaEntrada').value;
+            const horaEntrada = document.getElementById('vehiculoHoraEntrada').value;
+            const horaSalida = document.getElementById('vehiculoHoraSalida').value;
 
-            if (nombre && matricula && fecha && hora) {
-                const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
-                const newRow = table.insertRow();
+            const vehiculo = {
+                nombre: nombre,
+                matricula: matricula,
+                fechaEntrada: fechaEntrada,
+                horaEntrada: horaEntrada,
+                horaSalida: horaSalida
+            };
 
-                const nombreCell = newRow.insertCell(0);
-                const matriculaCell = newRow.insertCell(1);
-                const fechaCell = newRow.insertCell(2);
-                const horaCell = newRow.insertCell(3);
-                const actionsCell = newRow.insertCell(4);
+            vehiculos.push(vehiculo);
 
-                nombreCell.textContent = nombre;
-                matriculaCell.textContent = matricula;
-                fechaCell.textContent = formatDate(fecha);
-                horaCell.textContent = hora;
+            // Actualizar la tabla de vehículos en el HTML
+            const vehiculosTable = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
+            const newRow = vehiculosTable.insertRow();
+            newRow.innerHTML = `
+                <td>${nombre}</td>
+                <td>${matricula}</td>
+                <td>${fechaEntrada}</td>
+                <td>${horaEntrada}</td>
+                <td>${horaSalida}</td>
+                <td><button onclick="deleteRow(this)">Eliminar</button></td>
+            `;
 
-                // Crear botones de acción
-                const editButton = document.createElement('button');
-                editButton.textContent = 'Editar';
-                editButton.onclick = function() {
-                    editarVehiculo(newRow);
-                };
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Eliminar';
-                deleteButton.onclick = function() {
-                    eliminarVehiculo(newRow);
-                };
-
-                actionsCell.appendChild(editButton);
-                actionsCell.appendChild(deleteButton);
-
-                // Limpiar campos después de agregar
-                document.getElementById('vehiculoNombre').value = '';
-                document.getElementById('vehiculoMatricula').value = '';
-                document.getElementById('vehiculoFecha').value = '';
-                document.getElementById('vehiculoHora').value = '';
-            } else {
-                alert('Por favor, completa todos los campos');
-            }
+            // Limpiar los campos después de guardar
+            document.getElementById('vehiculoNombre').value = '';
+            document.getElementById('vehiculoMatricula').value = '';
+            document.getElementById('vehiculoFechaEntrada').value = '';
+            document.getElementById('vehiculoHoraEntrada').value = '';
+            document.getElementById('vehiculoHoraSalida').value = '';
         }
 
-        // Función para editar un vehículo
-        function editarVehiculo(row) {
-            const nombreCell = row.cells[0];
-            const matriculaCell = row.cells[1];
-            const fechaCell = row.cells[2];
-            const horaCell = row.cells[3];
+        // Arreglo para almacenar los trabajadores
+        let trabajadores = [];
 
-            const newNombre = prompt('Editar nombre del vehículo', nombreCell.textContent);
-            const newMatricula = prompt('Editar matrícula', matriculaCell.textContent);
-            const newFecha = prompt('Editar fecha de entrada (dd/mm/yyyy)', fechaCell.textContent);
-            const newHora = prompt('Editar hora de entrada', horaCell.textContent);
-
-            if (newNombre && newMatricula && newFecha && newHora) {
-                nombreCell.textContent = newNombre;
-                matriculaCell.textContent = newMatricula;
-                fechaCell.textContent = newFecha;
-                horaCell.textContent = newHora;
-            } else {
-                alert('Por favor, completa todos los campos');
-            }
-        }
-
-        // Función para eliminar un vehículo
-        function eliminarVehiculo(row) {
-            const table = document.getElementById('vehiculosTable').getElementsByTagName('tbody')[0];
-            table.deleteRow(row.rowIndex - 1);
-        }
-
-        // Función para agregar trabajadores
-        function agregarTrabajador() {
+        // Función para guardar un trabajador y actualizar la tabla
+        function saveTrabajador() {
             const nombre = document.getElementById('trabajadorNombre').value;
             const apellido = document.getElementById('trabajadorApellido').value;
             const cargo = document.getElementById('trabajadorCargo').value;
@@ -466,96 +305,48 @@
             const descripcion = document.getElementById('trabajadorDescripcion').value;
             const direccion = document.getElementById('trabajadorDireccion').value;
 
-            if (nombre && apellido && cargo && fechaIngreso && descripcion && direccion) {
-                const table = document.getElementById('trabajadoresTable').getElementsByTagName('tbody')[0];
-                const newRow = table.insertRow();
+            const trabajador = {
+                nombre: nombre,
+                apellido: apellido,
+                cargo: cargo,
+                fechaIngreso: fechaIngreso,
+                descripcion: descripcion,
+                direccion: direccion
+            };
 
-                const nombreCell = newRow.insertCell(0);
-                const apellidoCell = newRow.insertCell(1);
-                const cargoCell = newRow.insertCell(2);
-                const fechaIngresoCell = newRow.insertCell(3);
-                const descripcionCell = newRow.insertCell(4);
-                const direccionCell = newRow.insertCell(5);
-                const actionsCell = newRow.insertCell(6);
+            trabajadores.push(trabajador);
 
-                nombreCell.textContent = nombre;
-                apellidoCell.textContent = apellido;
-                cargoCell.textContent = cargo;
-                fechaIngresoCell.textContent = formatDate(fechaIngreso);
-                descripcionCell.textContent = descripcion;
-                direccionCell.textContent = direccion;
+            // Actualizar la tabla de trabajadores en el HTML
+            const trabajadoresTable = document.getElementById('trabajadoresTable').getElementsByTagName('tbody')[0];
+            const newRow = trabajadoresTable.insertRow();
+            newRow.innerHTML = `
+                <td>${nombre}</td>
+                <td>${apellido}</td>
+                <td>${cargo}</td>
+                <td>${fechaIngreso}</td>
+                <td>${descripcion}</td>
+                <td>${direccion}</td>
+                <td><button onclick="deleteRow(this)">Eliminar</button></td>
+            `;
 
-                // Crear botones de acción
-                const editButton = document.createElement('button');
-                editButton.textContent = 'Editar';
-                editButton.onclick = function() {
-                    editarTrabajador(newRow);
-                };
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Eliminar';
-                deleteButton.onclick = function() {
-                    eliminarTrabajador(newRow);
-                };
-
-                actionsCell.appendChild(editButton);
-                actionsCell.appendChild(deleteButton);
-
-                // Limpiar campos después de agregar
-                document.getElementById('trabajadorNombre').value = '';
-                document.getElementById('trabajadorApellido').value = '';
-                document.getElementById('trabajadorCargo').value = '';
-                document.getElementById('trabajadorFechaIngreso').value = '';
-                document.getElementById('trabajadorDescripcion').value = '';
-                document.getElementById('trabajadorDireccion').value = '';
-            } else {
-                alert('Por favor, completa todos los campos');
-            }
+            // Limpiar los campos después de guardar
+            document.getElementById('trabajadorNombre').value = '';
+            document.getElementById('trabajadorApellido').value = '';
+            document.getElementById('trabajadorCargo').value = '';
+            document.getElementById('trabajadorFechaIngreso').value = '';
+            document.getElementById('trabajadorDescripcion').value = '';
+            document.getElementById('trabajadorDireccion').value = '';
         }
 
-        // Función para editar un trabajador
-        function editarTrabajador(row) {
-            const nombreCell = row.cells[0];
-            const apellidoCell = row.cells[1];
-            const cargoCell = row.cells[2];
-            const fechaIngresoCell = row.cells[3];
-            const descripcionCell = row.cells[4];
-            const direccionCell = row.cells[5];
-
-            const newNombre = prompt('Editar nombre', nombreCell.textContent);
-            const newApellido = prompt('Editar apellido', apellidoCell.textContent);
-            const newCargo = prompt('Editar cargo', cargoCell.textContent);
-            const newFechaIngreso = prompt('Editar fecha de ingreso (dd/mm/yyyy)', fechaIngresoCell.textContent);
-            const newDescripcion = prompt('Editar descripción', descripcionCell.textContent);
-            const newDireccion = prompt('Editar dirección', direccionCell.textContent);
-
-            if (newNombre && newApellido && newCargo && newFechaIngreso && newDescripcion && newDireccion) {
-                nombreCell.textContent = newNombre;
-                apellidoCell.textContent = newApellido;
-                cargoCell.textContent = newCargo;
-                fechaIngresoCell.textContent = newFechaIngreso;
-                descripcionCell.textContent = newDescripcion;
-                direccionCell.textContent = newDireccion;
-            } else {
-                alert('Por favor, completa todos los campos');
-            }
+        // Función para eliminar una fila de la tabla
+        function deleteRow(btn) {
+            const row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
         }
-
-        // Función para eliminar un trabajador
-        function eliminarTrabajador(row) {
-            const table = document.getElementById('trabajadoresTable').getElementsByTagName('tbody')[0];
-            table.deleteRow(row.rowIndex - 1);
-        }
-
-        // Función para formatear fechas
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses son base 0
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
-        }
-    </script>
-</body>
-</html>
+    </div>
+<!-- Apartado de derechos de autor -->
+<div class="copyright">
+    &copy; 2024 JAAC61. Todos los derechos reservados.
+</div>
 
 

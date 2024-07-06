@@ -104,6 +104,18 @@
             margin-bottom: 20px;
             color: #3d85c6; /* Azul más claro */
         }
+
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #3d85c6;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
 </head>
@@ -142,8 +154,8 @@
                         <th>Nombre</th>
                         <th>Matrícula</th>
                         <th>Fecha de Entrada</th>
-                        <th>Hora de Entrada</th>
                         <th>Hora de Salida</th>
+                        <th>Hora de Entrada</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -164,11 +176,11 @@
                 <input type="date" id="vehiculoFechaEntrada">
             </div>
             <div class="form-group">
-                <label for="vehiculoHoraEntrada">Hora de Entrada:</label>
+                <label for="vehiculoHoraEntrada">Hora de Salida:</label>
                 <input type="time" id="vehiculoHoraEntrada">
             </div>
             <div class="form-group">
-                <label for="vehiculoHoraSalida">Hora de Salida:</label>
+                <label for="vehiculoHoraSalida">Hora de Entrada:</label>
                 <input type="time" id="vehiculoHoraSalida">
             </div>
             <div class="form-group">
@@ -222,6 +234,13 @@
                 <button onclick="saveTrabajador()">Guardar Trabajador</button>
             </div>
         </div>
+        <div class="logout">
+            <button onclick="cerrarSesion()">Cerrar Sesión</button>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2024 JAAC61. Todos los derechos reservados.
+    </div>
     <script>
         // Arreglo para almacenar los turnos
         let turnos = [];
@@ -343,10 +362,11 @@
             const row = btn.parentNode.parentNode;
             row.parentNode.removeChild(row);
         }
-    </div>
-<!-- Apartado de derechos de autor -->
-<div class="copyright">
-    &copy; 2024 JAAC61. Todos los derechos reservados.
-</div>
 
-
+        // Función para cerrar sesión y redirigir a una página web
+        function cerrarSesion() {
+            window.location.href = 'https://www.youtube.com'; // Cambia esta URL a la página de destino
+        }
+    </script>
+</body>
+</html>
